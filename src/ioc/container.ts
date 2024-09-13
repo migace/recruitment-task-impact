@@ -1,5 +1,13 @@
 import { Container } from "inversify";
 import { Symbols } from "./symbols";
+import { CategoryRepository } from "@/repositories/category-repository";
+import { FetchCategoriesUseCase } from "@/domain/fetch-categories-use-case";
+import { ProductRepository } from "@/repositories/product-repository";
+import { FetchProductsByCategoryUseCase } from "@/domain/fetch-products-by-category-use-case";
+import { AddProductToCartUseCase } from "@/domain/add-product-to-cart-use-case";
+import { CartRepositoryInMemory } from "@/repositories/cart-repository-in-memory";
+import { GetCartUseCase } from "@/domain/get-cart-use-case";
+import { CreateCartUseCase } from "@/domain/create-cart-use-case";
 
 const container = new Container({
   defaultScope: "Singleton",
@@ -7,6 +15,16 @@ const container = new Container({
 
 container
   .bind<string>(Symbols.ApiBaseUrl)
-  .toConstantValue(process.env.API_BASE_URL ?? "");
+  .toConstantValue(process.env.NEXT_PUBLIC_API_BASE_URL ?? "");
+container.bind(Symbols.CategoriesRepository).to(CategoryRepository);
+container.bind(Symbols.FetchCategoriesUseCase).to(FetchCategoriesUseCase);
+container.bind(Symbols.ProductRepository).to(ProductRepository);
+container
+  .bind(Symbols.FetchProductsByCategoryUseCase)
+  .to(FetchProductsByCategoryUseCase);
+container.bind(Symbols.AddProductToCartUseCase).to(AddProductToCartUseCase);
+container.bind(Symbols.CartRepository).to(CartRepositoryInMemory);
+container.bind(Symbols.GetCartUseCase).to(GetCartUseCase);
+container.bind(Symbols.CreateCartUseCase).to(CreateCartUseCase);
 
 export default container;

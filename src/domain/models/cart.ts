@@ -2,8 +2,13 @@ import { CartItem } from "./cart-item";
 import { Product } from "./product";
 
 export class Cart {
+  id: string = "";
   items: CartItem[] = [];
   totalPrice: number = 0;
+
+  constructor(cartId?: string) {
+    this.id = cartId || crypto.randomUUID();
+  }
 
   addItem(product: Product, quantity: number = 1): void {
     const existingItem = this.items.find(
@@ -19,12 +24,12 @@ export class Cart {
     this.calculateTotalPrice();
   }
 
-  removeItem(productId: string): void {
+  removeItem(productId: number): void {
     this.items = this.items.filter((item) => item.product.id !== productId);
     this.calculateTotalPrice();
   }
 
-  updateItemQuantity(productId: string, quantity: number): void {
+  updateItemQuantity(productId: number, quantity: number): void {
     const item = this.items.find((item) => item.product.id === productId);
 
     if (item) {

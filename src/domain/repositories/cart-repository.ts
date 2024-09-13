@@ -1,6 +1,6 @@
 import { Cart } from "../models/cart";
 
 export interface ICartRepository {
-  fetchCart(): Promise<Cart>;
+  getCart(cardId: string): Promise<Cart>;
   saveCart(cart: Cart): Promise<void>;
 }

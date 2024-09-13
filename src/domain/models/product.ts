@@ -1,8 +1,11 @@
 export class Product {
-  public id: string | undefined;
-  public image: string | undefined;
-
-  constructor(public name: string, public price: number) {
-    this.id = crypto.randomUUID();
-  }
+  constructor(
+    public id: number,
+    public title: string,
+    public price: number,
+    public description: string,
+    public category: string,
+    public image: string,
+    public productsQty: number
+  ) {}
 }
