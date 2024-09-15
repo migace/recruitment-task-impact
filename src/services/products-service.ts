@@ -10,10 +10,5 @@ export async function fetchProductsByCategories(
     container.get<FetchProductsByCategoryUseCase>(
       Symbols.FetchProductsByCategoryUseCase
     );
-  const products = await fetchProductsByCategoriesUseCase.execute(categoryName);
-
-  // development only
-  console.log("Server fetched products by category: ", products.slice(0, 2));
-
-  return products;
+  return await fetchProductsByCategoriesUseCase.execute(categoryName);
 }

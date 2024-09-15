@@ -5,9 +5,10 @@ import { FetchCategoriesUseCase } from "@/domain/fetch-categories-use-case";
 import { ProductRepository } from "@/repositories/product-repository";
 import { FetchProductsByCategoryUseCase } from "@/domain/fetch-products-by-category-use-case";
 import { AddProductToCartUseCase } from "@/domain/add-product-to-cart-use-case";
-import { CartRepositoryInMemory } from "@/repositories/cart-repository-in-memory";
+import { CartRepository } from "@/repositories/cart-repository";
 import { GetCartUseCase } from "@/domain/get-cart-use-case";
 import { CreateCartUseCase } from "@/domain/create-cart-use-case";
+import { RemoveProductFromCartUseCase } from "@/domain/remove-product-from-cart-use-case";
 
 const container = new Container({
   defaultScope: "Singleton",
@@ -23,8 +24,11 @@ container
   .bind(Symbols.FetchProductsByCategoryUseCase)
   .to(FetchProductsByCategoryUseCase);
 container.bind(Symbols.AddProductToCartUseCase).to(AddProductToCartUseCase);
-container.bind(Symbols.CartRepository).to(CartRepositoryInMemory);
+container.bind(Symbols.CartRepository).to(CartRepository);
 container.bind(Symbols.GetCartUseCase).to(GetCartUseCase);
 container.bind(Symbols.CreateCartUseCase).to(CreateCartUseCase);
+container
+  .bind(Symbols.RemoveProductFromCartUseCase)
+  .to(RemoveProductFromCartUseCase);
 
 export default container;

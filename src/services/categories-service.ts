@@ -9,8 +9,5 @@ export async function fetchCategories(): Promise<Category[]> {
   );
   const categories = await fetchCategoriesUseCase.execute();
 
-  // development only
-  console.log("Server fetched categories: ", categories);
-
   return categories;
 }

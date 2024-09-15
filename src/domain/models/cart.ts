@@ -1,7 +1,8 @@
+import { ICart } from "../types";
 import { CartItem } from "./cart-item";
 import { Product } from "./product";
 
-export class Cart {
+export class Cart implements ICart {
   id: string = "";
   items: CartItem[] = [];
   totalPrice: number = 0;

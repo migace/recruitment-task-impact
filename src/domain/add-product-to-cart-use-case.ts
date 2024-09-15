@@ -1,18 +1,20 @@
 import { Symbols } from "@/ioc/symbols";
 import { Cart } from "./models/cart";
 import { IUseCase } from "./use-case";
-import { CartRepositoryInMemory } from "@/repositories/cart-repository-in-memory";
+import { CartRepository } from "@/repositories/cart-repository";
 import { inject, injectable } from "inversify";
 import { Product } from "./models/product";
+import { ICart } from "./types";
+import { CartMapper } from "@/mappers/cart-mapper";
 
 @injectable()
 export class AddProductToCartUseCase
   implements
-    IUseCase<{ cartId: string; product: Product; quantity: number }, Cart>
+    IUseCase<{ cartId: string; product: Product; quantity: number }, ICart>
 {
   constructor(
     @inject(Symbols.CartRepository)
-    private cartRepository: CartRepositoryInMemory
+    private cartRepository: CartRepository
   ) {}
 
   async execute({
@@ -24,16 +26,18 @@ export class AddProductToCartUseCase
     product: Product;
     quantity?: number;
   }) {
-    const cart = await this.cartRepository.getCart(cartId);
+    let cart: ICart;
 
-    console.log("cart content", cart);
+    try {
+      cart = await this.cartRepository.get(cartId);
+    } catch (err) {
+      cart = await this.cartRepository.create(new Cart());
+    }
 
-    cart.addItem(product, quantity);
+    const cartObj = CartMapper.toEntity(cart);
 
-    console.log("cart content", cart);
+    cartObj.addItem(product, quantity);
 
-    await this.cartRepository.saveCart(cart);
-
-    return cart;
+    return this.cartRepository.save(cartObj);
   }
 }

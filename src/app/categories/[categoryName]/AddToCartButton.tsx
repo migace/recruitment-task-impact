@@ -1,26 +1,30 @@
 "use client";
 
+import { Product } from "@/domain/models/product";
 import { addItemToCart } from "@/services/cart-service";
 import { Button } from "flowbite-react";
+import { SyntheticEvent } from "react";
+import { toast } from "react-toastify";
 
 type AddToCartButtonProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  product: any;
+  product: Product;
 };
 
 export const AddToCartButton = ({ product }: AddToCartButtonProps) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const addProductToCartClickHandler = (product: any) => {
-    console.log("diniewndienid");
+  const addProductToCartClickHandler = (product: Product) => {
     addItemToCart(product);
+    toast.success("Product added to cart");
   };
 
   return (
     <Button
-      onClick={(e) => {
+      color="dark"
+      onClick={(e: SyntheticEvent<HTMLButtonElement>) => {
         e.preventDefault();
         addProductToCartClickHandler(product);
       }}
+      className="hover:opacity-50"
     >
       Add to cart
       <svg

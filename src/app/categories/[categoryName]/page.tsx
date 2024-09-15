@@ -23,12 +23,15 @@ export default async function CategoryPage({
         {productsByCategory.map((product) => (
           <li key={product.title}>
             <Card className="max-w-sm">
-              <Image
-                src={product.image}
-                alt={product.title}
-                width={200}
-                height={400}
-              />
+              <div className="relative h-[200px] flex items-center justify-center">
+                <Image
+                  layout="fixed"
+                  width={100}
+                  height={100}
+                  src={product.image}
+                  alt={product.title}
+                />
+              </div>
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {product.title} - {product.price}
               </h5>

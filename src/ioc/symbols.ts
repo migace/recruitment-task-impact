@@ -8,4 +8,5 @@ export const Symbols = {
   AddProductToCartUseCase: Symbol.for("AddProductToCartUseCase"),
   GetCartUseCase: Symbol.for("GetCartUseCase"),
   CreateCartUseCase: Symbol.for("CreateCartUseCase"),
+  RemoveProductFromCartUseCase: Symbol.for("RemoveProductFromCartUseCase"),
 };

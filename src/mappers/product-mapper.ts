@@ -1,20 +1,19 @@
 import { Product } from "@/domain/models/product";
+import { IProduct } from "@/domain/types";
 
 export class ProductMapper {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  static toEntity(apiResponse: any): Product {
+  static toEntity(apiResponse: IProduct): Product {
     return new Product(
       apiResponse.id,
       apiResponse.title,
       apiResponse.price,
       apiResponse.description,
       apiResponse.category,
-      apiResponse.image,
-      apiResponse.productsQty
+      apiResponse.image
     );
   }
 
-  static toApi(product: Product): unknown {
+  static toApi(product: Product): Product {
     return {
       id: product.id,
       title: product.title,
@@ -22,7 +21,6 @@ export class ProductMapper {
       description: product.description,
       category: product.category,
       image: product.image,
-      productsQty: product.productsQty,
     };
   }
 }

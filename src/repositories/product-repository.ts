@@ -1,4 +1,5 @@
 import { IProductRepository } from "@/domain/repositories/product-repository";
+import { IProduct } from "@/domain/types";
 import { Symbols } from "@/ioc/symbols";
 import { ProductMapper } from "@/mappers/product-mapper";
 import { inject, injectable } from "inversify";
@@ -18,6 +19,6 @@ export class ProductRepository implements IProductRepository {
     );
     const data = await response.json();
 
-    return data.map((product: string) => ProductMapper.toEntity(product));
+    return data.map((product: IProduct) => ProductMapper.toEntity(product));
   }
 }

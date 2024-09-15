@@ -11,11 +11,10 @@ export const Appbar = () => (
         Impact Recruitment Task
       </span>
     </Navbar.Brand>
-    <Navbar.Toggle />
     <ul className="flex items-center gap-4">
       <Link href="/cart" passHref legacyBehavior>
         <Navbar.Link>
-          <MdOutlineShoppingCart />
+          <MdOutlineShoppingCart size="1.5em" />
         </Navbar.Link>
       </Link>
     </ul>

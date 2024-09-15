@@ -1,5 +1,5 @@
-import { Category } from "../models/category";
+import { ICategory } from "../types";
 
 export interface ICategoryRepository {
-  getCategories: () => Promise<Category[]>;
+  getCategories: () => Promise<ICategory[]>;
 }
